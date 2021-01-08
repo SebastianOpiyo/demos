@@ -1,2 +1,2 @@
 # demos
-Demo projects.
+Demo projects I create at my free time(that is hard to come by anyway.)
