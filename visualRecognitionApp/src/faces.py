@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 import pickle
 
-face_cascade = cv2.CascadeClassifier('cascades/data/haarcascade_frontalface_alt2.xml')
+face_cascade = cv2.CascadeClassifier('./cascades/data/haarcascade_frontalface_alt2.xml')
 # eye_cascade = cv2.CascadeClassifier('cascades/data/haarcascade_eye.xml')
 # smile_cascade = cv2.CascadeClassifier('cascades/data/haarcascade_smile.xml')
 
@@ -17,11 +17,16 @@ with open("pickles/face-labels.pickle", 'rb') as f:
 
 cap = cv2.VideoCapture(0)
 
+# call one of the resolution settings right here.
 while(True):
     # Capture frame-by-frame
     ret, frame = cap.read()
+    # Change image resolution by using helper methods defined in the helper module.
+    # frame = rescale_frame(frame, percent=70)
+    # cv2.imshow('resized_frame', frame)
     gray  = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.5, minNeighbors=5)
+
     for (x, y, w, h) in faces:
         print(x,y,w,h)
         roi_gray = gray[y:y+h, x:x+w] #(ycord_start, ycord_end)
