@@ -6,7 +6,7 @@ while True:
     ret, frame = vid.read()
     cv2.imshow('frame', frame)
 
-    #'q' button is used as the quitting button
+    # 'q' button is used as the quitting button
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
