@@ -10,13 +10,16 @@ from datetime import datetime
 from gui.controller import db
 
 
-# Write user and time of reporting to csv file.
+# Write user and time of reporting to csv file & sqlite db.
 def write_to_csv(user_name: str):
     time = datetime.now()
     report_date = time.strftime("%b %d, %Y")
     time_stamp = time.strftime("%H:%M:%S")
     data = [user_name, report_date, time_stamp]
     print(data)
+    db.execute("INSERT INTO REGISTER (NAME, DATE, TIMESTAMP) VALUES (user_name, report_date, time_stamp)")
+    db.commit()
+    db.close()
     with open('./register/attendance.csv', mode='w') as attendance_file:
         attendance_writer = csv.writer(attendance_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         attendance_writer.writerow(data)
