@@ -17,9 +17,13 @@ def write_to_csv(user_name: str):
     time_stamp = time.strftime("%H:%M:%S")
     data = [user_name, report_date, time_stamp]
     print(data)
+
+    # Database execution here.
     db.execute("INSERT INTO REGISTER (NAME, DATE, TIMESTAMP) VALUES (user_name, report_date, time_stamp)")
     db.commit()
     db.close()
+
+    # Csv entry done here
     with open('./register/attendance.csv', mode='w') as attendance_file:
         attendance_writer = csv.writer(attendance_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         attendance_writer.writerow(data)
