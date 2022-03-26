@@ -5,10 +5,10 @@ Real Time Face Recogition
 """
 
 import cv2
-import numpy as np
-import os
 import csv
 from datetime import datetime
+from gui.controller import db
+
 
 # Write user and time of reporting to csv file.
 def write_to_csv(user_name: str):
@@ -46,7 +46,7 @@ minH = 0.1 * cam.get(4)
 
 while True:
     ret, img = cam.read()
-    # img = cv2.flip(img, -1)  # Flip vertically
+    # img = cv2.flip(img, -1)  # Flip vertically in case the image is inverted
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     faces = faceCascade.detectMultiScale(
@@ -62,11 +62,11 @@ while True:
 
         id, confidence = recognizer.predict(gray[y:y + h, x:x + w])
 
-        # Check if confidence is less them 100 ==> "0" is perfect match
-        if (confidence < 100):
+        # Check if confidence is less than 100 ==> "0" is perfect match
+        if confidence < 100:
             id_name = names[id]
             confidence = "  {0}%".format(round(100 - confidence))
-            write_to_csv(id_name)
+            write_to_csv(id_name)  # write to db instead
         else:
             id_name = "unknown"
             confidence = "  {0}%".format(round(100 - confidence))
