@@ -1,10 +1,12 @@
 import os
+import sqlite3
 
 """
 Module: controller - has all the controller/utility functions used by the GUI EVENTS.
 Description: the functions prefixed with `run` are meant for script exec.
 
 """
+db = sqlite3.connect('../data/register.db')
 
 
 def run_registration():
