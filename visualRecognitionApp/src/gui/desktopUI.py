@@ -18,24 +18,24 @@ class VisualRecognitionGui:
         root.columnconfigure(0, weight=1)
         root.columnconfigure(1, weight=3)
 
-        mainframe = ttk.Frame(root, padding="5")
-        mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
+        mainframe = ttk.Frame(root, padding="5 5 5 5")
+        mainframe.grid(column=0, row=0, sticky="N, W, E, S")
 
         header = Label(mainframe, text="******* FACE RECOGNITION ATTENDANCE SYSTEM *******", font=("Arial Bold", 15))
         header.grid(column=1, row=0)
 
         # # TODO: Ensure the image is displayed
-        image = PhotoImage(file='homeimage.png')
-        label = Label(mainframe, image=image)
-        label.grid(column=1, row=16)
+        # image = PhotoImage(file='homeimage.png')
+        # label = Label(mainframe, image=image)
+        # label.grid(column=1, row=16)
 
         # Create widgets
         ttk.Button(mainframe, text="Test Camera", command=run_camera).grid(column=0, row=2, sticky=S)
         ttk.Button(mainframe, text="Check-in", command=run_recognizer_register).grid(column=2, row=2,
-                                                                                     sticky=(N, W, E, S))
+                                                                                       sticky="N, W, E, S")
         ttk.Button(mainframe, text="Train", command=run_face_train).grid(column=0, row=7, sticky=W)
         ttk.Button(mainframe, text="Register User", command=run_registration).grid(column=2, row=7, sticky=W)
-        ttk.Button(mainframe, text="Exit Camera", command=run_registration).grid(column=1, row=15, sticky=S)
+        ttk.Button(mainframe, text="Quit", command=root.destroy).grid(column=1, row=15, sticky=S)
 
         for child in mainframe.winfo_children():
             child.grid_configure(padx=5, pady=5)

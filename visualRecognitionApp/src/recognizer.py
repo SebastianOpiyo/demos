@@ -7,7 +7,7 @@ Real Time Face Recogition
 import cv2
 import csv
 from datetime import datetime
-from gui.controller import db
+from data.db import db
 
 
 # Write user and time of reporting to csv file & sqlite db.
