@@ -15,10 +15,10 @@ try:
              (ID INT PRIMARY KEY     NOT NULL,
              NAME           TEXT    NOT NULL,
              DATE_TIME            DATE     NOT NULL);''')
+
+    print("Table created successfully")
 except sqlite3.Error as er:
     print(f'Sqlite3 encountered an error, {er}')
-
-
 
 
 def run_registration():
