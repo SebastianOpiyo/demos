@@ -6,6 +6,7 @@ Real Time Face Recogition
 
 import cv2
 import csv
+import sqlite3
 from datetime import datetime
 from data.db import db
 
@@ -16,12 +17,21 @@ def write_to_csv(user_name: str):
     report_date = time.strftime("%b %d, %Y")
     time_stamp = time.strftime("%H:%M:%S")
     data = [user_name, report_date, time_stamp]
-    print(data)
-
     # Database execution here.
-    db.execute("INSERT INTO REGISTER (NAME, DATE, TIMESTAMP) VALUES (user_name, report_date, time_stamp)")
-    db.commit()
-    db.close()
+
+    try:
+        db_cursor = db.cursor()
+        params = (user_name, report_date, time_stamp)
+        db_cursor.execute("INSERT INTO REGISTER VALUES (NULL, ?, ?, ?)", params)
+        db.commit()
+        db_cursor.close()
+        # List users in db
+        select_cursor = db.cursor()
+        select_cursor.execute("select * from REGISTER ")
+        print(select_cursor.fetchall())
+        select_cursor.close()
+    except sqlite3.ProgrammingError as e:
+        pass
 
     # Csv entry done here
     with open('./register/attendance.csv', mode='w') as attendance_file:
