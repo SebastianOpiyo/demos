@@ -42,6 +42,40 @@ def login():
         font=f,
         show='*'
     )
+
+    # Addition
+    def login_response():
+        username, pwd = "", ""
+        try:
+            con = sqlite3.connect('../data/userdata.db')
+            c = con.cursor()
+            for row in c.execute("Select * from record"):
+                username = row[1]
+                pwd = row[5]
+
+        except Exception as ep:
+            messagebox.showerror('', ep)
+
+        uname = email_tf.get()
+        upwd = pwd_tf.get()
+        check_counter = 0
+        if uname == "":
+            warn = "Username can't be empty"
+        else:
+            check_counter += 1
+        if upwd == "":
+            warn = "Password can't be empty"
+        else:
+            check_counter += 1
+        if check_counter == 2:
+            if uname == username and upwd == pwd:
+                messagebox.showinfo('Login Status', 'Logged in Successfully!')
+
+            else:
+                messagebox.showerror('Login Status', 'invalid username or password')
+        else:
+            messagebox.showerror('', warn)
+
     login_btn = Button(
         left_frame,
         width=15,
@@ -56,39 +90,8 @@ def login():
     pwd_tf.grid(row=1, column=1, pady=10, padx=20)
     login_btn.grid(row=2, column=1, pady=10, padx=20)
     left_frame.pack()
-    # login_response(email_tf, pwd_tf)
 
     ws.mainloop()
+    return email_tf, pwd_tf
 
 
-def login_response(email_tf, pwd_tf):
-    username, pwd = "", ""
-    try:
-        con = sqlite3.connect('../data/userdata.db')
-        c = con.cursor()
-        for row in c.execute("Select * from record"):
-            username = row[1]
-            pwd = row[5]
-
-    except Exception as ep:
-        messagebox.showerror('', ep)
-
-    uname = email_tf.get()
-    upwd = pwd_tf.get()
-    check_counter = 0
-    if uname == "":
-        warn = "Username can't be empty"
-    else:
-        check_counter += 1
-    if upwd == "":
-        warn = "Password can't be empty"
-    else:
-        check_counter += 1
-    if check_counter == 2:
-        if uname == username and upwd == pwd:
-            messagebox.showinfo('Login Status', 'Logged in Successfully!')
-
-        else:
-            messagebox.showerror('Login Status', 'invalid username or password')
-    else:
-        messagebox.showerror('', warn)
