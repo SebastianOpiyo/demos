@@ -70,7 +70,7 @@ def login():
         if check_counter == 2:
             if uname == username and upwd == pwd:
                 messagebox.showinfo('Login Status', 'Logged in Successfully!')
-
+                ws.destroy()
             else:
                 messagebox.showerror('Login Status', 'invalid username or password')
         else:
