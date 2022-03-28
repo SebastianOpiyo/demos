@@ -49,7 +49,7 @@ def login():
         font=f,
         relief=SOLID,
         cursor='hand2',
-        command=login_response(email_tf, pwd_tf)
+        command=login_response
     )
 
     email_tf.grid(row=0, column=1, pady=10, padx=20)
