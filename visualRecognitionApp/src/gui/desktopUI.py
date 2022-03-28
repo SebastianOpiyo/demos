@@ -2,7 +2,11 @@ import sys
 import os
 from tkinter import *
 from tkinter import ttk
+from login_gui import login
 from controller import run_camera, run_registration, run_recognizer_register, run_face_train
+
+# we call the login first
+login()
 
 
 # TODO: handle exceptions with try-except
@@ -34,7 +38,7 @@ class VisualRecognitionGui:
         # Create widgets
         ttk.Button(mainframe, text="Test Camera", command=run_camera).grid(column=0, row=2, sticky=S)
         ttk.Button(mainframe, text="Check-in", command=run_recognizer_register).grid(column=2, row=2,
-                                                                                       sticky="N, W, E, S")
+                                                                                     sticky="N, W, E, S")
         ttk.Button(mainframe, text="Train", command=run_face_train).grid(column=0, row=7, sticky=W)
         ttk.Button(mainframe, text="Register User", command=run_registration).grid(column=2, row=7, sticky=W)
         ttk.Button(mainframe, text="Quit", command=root.destroy).grid(column=1, row=15, sticky=S)
