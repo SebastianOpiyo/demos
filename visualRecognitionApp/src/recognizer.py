@@ -34,7 +34,7 @@ def write_to_csv(user_name: str):
         pass
 
     # Csv entry done here
-    with open('./register/attendance.csv', mode='w') as attendance_file:
+    with open('register/attendance.csv', mode='w') as attendance_file:
         attendance_writer = csv.writer(attendance_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         attendance_writer.writerow(data)
 
