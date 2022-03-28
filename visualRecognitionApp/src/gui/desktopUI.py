@@ -25,9 +25,11 @@ class VisualRecognitionGui:
         header.grid(column=1, row=0)
 
         # # TODO: Ensure the image is displayed
-        # image = PhotoImage(file='homeimage.png')
-        # label = Label(mainframe, image=image)
-        # label.grid(column=1, row=16)
+        image = PhotoImage(file='homeimage.png')
+        image_label = Label(mainframe)
+        image_label.image = image
+        image_label['image'] = image_label.image
+        image_label.grid(column=1, row=16)
 
         # Create widgets
         ttk.Button(mainframe, text="Test Camera", command=run_camera).grid(column=0, row=2, sticky=S)
@@ -45,4 +47,5 @@ class VisualRecognitionGui:
 
 window = Tk()
 VisualRecognitionGui(window)
+window.after(3000)
 window.mainloop()

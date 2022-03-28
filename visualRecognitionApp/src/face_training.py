@@ -16,7 +16,7 @@ detector = cv2.CascadeClassifier("./cascades/data/haarcascade_frontalface_defaul
 
 
 # function to get the images and label data
-def getImagesAndLabels(path):
+def getImagesAndLabels(path=path):
     imagePaths = [os.path.join(path, f) for f in os.listdir(path)]
     faceSamples = []
     ids = []
