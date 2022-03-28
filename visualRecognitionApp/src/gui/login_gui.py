@@ -49,21 +49,22 @@ def login():
         font=f,
         relief=SOLID,
         cursor='hand2',
-        command=None
+        command=login_response(email_tf, pwd_tf)
     )
 
     email_tf.grid(row=0, column=1, pady=10, padx=20)
     pwd_tf.grid(row=1, column=1, pady=10, padx=20)
     login_btn.grid(row=2, column=1, pady=10, padx=20)
     left_frame.pack()
-    login_response(email_tf, pwd_tf)
+    # login_response(email_tf, pwd_tf)
 
     ws.mainloop()
 
 
 def login_response(email_tf, pwd_tf):
+    username, pwd = "", ""
     try:
-        con = sqlite3.connect('userdata.db')
+        con = sqlite3.connect('../data/userdata.db')
         c = con.cursor()
         for row in c.execute("Select * from record"):
             username = row[1]
@@ -84,7 +85,7 @@ def login_response(email_tf, pwd_tf):
     else:
         check_counter += 1
     if check_counter == 2:
-        if (uname == username and upwd == pwd):
+        if uname == username and upwd == pwd:
             messagebox.showinfo('Login Status', 'Logged in Successfully!')
 
         else:
