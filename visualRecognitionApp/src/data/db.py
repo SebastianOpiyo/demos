@@ -1,7 +1,7 @@
 import sqlite3
 
 # database driver
-db = sqlite3.connect('./data/register.db')
+db = sqlite3.connect('register.db')
 try:
     db_cursor = db.cursor()
     print("Database created successfully")
