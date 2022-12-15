@@ -1,4 +1,5 @@
 import os
+import subprocess
 from tkinter import messagebox
 
 """
@@ -13,7 +14,8 @@ def run_registration():
     try:
         for f in os.listdir("../"):
             if f == 'image_capture.py':
-                os.system('python ../image_capture.py')
+                # os.system('python ../image_capture.py')
+                subprocess.run('python ../image_capture.py')
                 print("Successfully ran the user registration script")
                 messagebox.showinfo("Success", "Registration Successful!")
                 break
@@ -27,7 +29,8 @@ def run_camera():
     try:
         for f in os.listdir("../"):
             if f == 'camera_test.py':
-                os.system('python ../camera_test.py')
+                # os.system('python ../camera_test.py')
+                subprocess.run('python ../camera_test.py')
                 print("Successfully tested the camera")
                 messagebox.showinfo("Success", "Camera Is Cool!")
                 break
@@ -41,7 +44,8 @@ def run_face_train():
     try:
         for f in os.listdir("../"):
             if f == 'face_training.py':
-                os.system('python ../face_training.py')
+                # os.system('python ../face_training.py')
+                subprocess.run('python ../face_training.py')
                 messagebox.showinfo("Success", "Model Training script ran successfully")
                 break
     except (FileNotFoundError, FileExistsError) as e:
