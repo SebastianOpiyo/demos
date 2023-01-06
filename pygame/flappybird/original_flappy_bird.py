@@ -26,16 +26,27 @@ END_GAME_FONT = pygame.font.SysFont('comicsansms', 50)
 
 # Background Image
 BACKGROUND_IMAGE = pygame.image.load(os.path.join("assets", "background.png")).convert_alpha()
-# Bird/player Image
+
+# Image Sprites
 player1Image = pygame.image.load(os.path.join("assets", "1.png")).convert_alpha()
+
+# Load the sprite images for animation
+image_sprite = [
+    pygame.image.load(os.path.join("assets", "1.png")).convert_alpha(),
+    pygame.image.load(os.path.join("assets", "2.png")).convert_alpha(),
+    pygame.image.load(os.path.join("assets", "3.png")).convert_alpha(),
+    pygame.image.load(os.path.join("assets", "4.png")).convert_alpha(),
+    pygame.image.load(os.path.join("assets", "5.png")).convert_alpha(),
+    pygame.image.load(os.path.join("assets", "6.png")).convert_alpha(),
+    pygame.image.load(os.path.join("assets", "1.png")).convert_alpha()
+]
+
+# We use the frame variable to iterate through the image_sprite list.
+frame_value = 0
+
 # Obstacle Image
 OBSTACLE_SURFACE = pygame.image.load(os.path.join("assets", "pipe.png"))
-# player1Image = pygame.image.load("images/player.png").convert_alpha()
-# player1Image = pygame.image.load("images/player.png").convert_alpha()
-# player1Image = pygame.image.load("images/player.png").convert_alpha()
-# player1Image = pygame.image.load("images/player.png").convert_alpha()
-# player1Image = pygame.image.load("images/player.png").convert_alpha()
-# player1Image = pygame.image.load("images/player.png").convert_alpha()
+
 
 # resize images
 BACKGROUND_IMAGE = pygame.transform.scale(BACKGROUND_IMAGE, (SCREENWIDTH, SCREENHEIGHT))
@@ -64,8 +75,19 @@ while gameState != "exit":  # game loop - note:  everything in the mainloop is i
     # Add the background
     screen.blit(BACKGROUND_IMAGE, (0, 0))
 
+    # To see the results properly we set the framerate to 3fps.
+    # clock.tick(3)
+
+    # reset the frame to zero if the its value is greater than
+    # the list length.
+    if frame_value > len(image_sprite):
+        frame_value = 0
+    
+    # store the image in variable
+    image = image_sprite[frame_value]
+
     # draw the player
-    screen.blit(player1Image, (player1pos[0], player1pos[1]))
+    screen.blit(image, (player1pos[0], player1pos[1]))
 
     # draw the obstacles
     pygame.draw.rect(screen, OBSTACLE_COLOR, (obstacle_x_pos, 0, OBSTACLE_WIDTH, obstacle_height))
@@ -92,6 +114,7 @@ while gameState != "exit":  # game loop - note:  everything in the mainloop is i
         if not player1pos[1] < 0:
             player1pos[1] -= 10
 
+    # frame_value += 1
     # detect a collision
     if 50 <= obstacle_x_pos <= (100 + 70):
         if player1pos[1] <= obstacle_height or player1pos[1] >= (bottom_obstacle_height - 70):
@@ -102,6 +125,7 @@ while gameState != "exit":  # game loop - note:  everything in the mainloop is i
     # your code ends here ###############################
     pygame.display.flip()  # transfers build screen to human visible screen
     clock.tick(FPS)  # limits game to frame per second, FPS value
+    
 
 # out of game loop ###############
 print("The game has closed")  # notifies user the game has ended
